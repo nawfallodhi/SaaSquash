@@ -3,6 +3,7 @@ import StatsBar from "./components/StatsBar";
 import NetworkGraph from "./components/NetworkGraph";
 import ActivityFeed from "./components/ActivityFeed";
 import Intro from "./components/Intro";
+import logoimg from "./assets/logo.png"
 import {
   NAMES, REWARDS, MILESTONES,
   spawnPosition, pickRandom,
@@ -14,6 +15,37 @@ const GRAPH_H = 480;
 const TICK_MS = 2400;
 const MAX_NODES = 28;
 const RESET_PAUSE_MS = 2000;
+
+const Logo = ({ onClick }) => {
+  const [hover, setHover] = useState(false);
+
+  return (
+    <div
+      onClick={onClick}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 9,
+        cursor: "pointer",
+        userSelect: "none",
+        transform: hover ? 0.8 : 1,
+        transition: "transform 0.15s ease",
+      }}
+    >
+      <img
+        src={logoimg}
+        alt="saasquatch logo"
+        style={{
+          width: 200,
+          height: 200,
+          objectFit: "contain",
+        }}
+      />
+    </div>
+  );
+};
 
 let nodeIdCounter = 1;
 let eventIdCounter = 0;
@@ -120,24 +152,25 @@ export default function App() {
   return (
     <div style={{ minHeight: "100vh", background: "var(--bg)", color: "var(--text)", fontFamily: "var(--font)" }}>
       <header style={{
-        borderBottom: "1px solid var(--border)", padding: "0 1.5rem", height: 56,
+        borderBottom: "1px solid var(--border)", padding: "0 1.5rem", height: 65,
         display: "flex", alignItems: "center", justifyContent: "space-between",
         background: "var(--header-bg)",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
-            <circle cx="16" cy="16" r="16" fill="#1a6b45"/>
-            <circle cx="11" cy="13" r="3.5" fill="#fff"/>
-            <circle cx="21" cy="13" r="3.5" fill="#fff"/>
-            <circle cx="16" cy="21" r="3.5" fill="#fff"/>
-          </svg>
-          <span style={{ fontWeight: 700, fontSize: 15, color: "var(--text)" }}>saasquatch</span>
+          <Logo onClick={() => {
+            setShowIntro(true);
+            setNodes([makeOriginNode()]);
+            setEdges([]);
+            setEvents([]);
+            setStats({ referrals: 0, rewardsPaid: 0, revenue: 0 });
+            setWave(1);
+            }} />
           <span style={{ fontSize: 12, color: "var(--text-muted)", paddingLeft: 6, borderLeft: "1px solid var(--border)" }}>
-            live referral network demo
+            Live Referral Demo
           </span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <span style={{ fontSize: 11, color: "var(--text-muted)" }}>built by Nawfal Lodhi · impact.com co-op application</span>
+          <span style={{ fontSize: 11, color: "var(--text-muted)" }}>Sign up now!</span>
           <a
             href="https://www.saasquatch.com" target="_blank" rel="noreferrer"
             style={{

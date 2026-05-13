@@ -1,13 +1,36 @@
 import { useState } from "react";
 import logoimg from "../assets/logo.png"
 
-const Logo = ({onClick}) => (
-  <div onClick={onClick} style={{ display: "flex", alignItems: "center", gap: 9 }}>
-    <img src={logoimg} alt ="saasquash logo" style ={{width:200,height:200,objectFit:"contain",}}>
-    </img>
-    <span style={{ fontWeight: 700, fontSize: 15, color: "var(--text)" }}></span>
-  </div>
-);
+const Logo = ({ onClick }) => {
+  const [hover, setHover] = useState(false);
+
+  return (
+    <div
+      onClick={onClick}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 9,
+        cursor: "pointer",
+        userSelect: "none",
+        transform: hover ? 0.8 : 1,
+        transition: "transform 0.15s ease",
+      }}
+    >
+      <img
+        src={logoimg}
+        alt="saasquatch logo"
+        style={{
+          width: 200,
+          height: 200,
+          objectFit: "contain",
+        }}
+      />
+    </div>
+  );
+};
 
 const ReferralLoopSVG = () => (
   <svg viewBox="0 0 480 180" width="100%" style={{ maxWidth: 480, display: "block", margin: "0 auto" }}>
@@ -56,14 +79,14 @@ const SLIDES = [
   {
     tag: "The solution",
     heading: "Turn every happy customer into a referral engine.",
-    sub: "SaaSquatch automates the entire referral lifecycle — from share link generation to reward fulfilment — so your program runs itself.",
+    sub: "SaaSquatch automates the entire referral lifecycle so your program runs itself.",
     visual: <ReferralLoopSVG />,
     cta: "What does that look like? →",
   },
   {
     tag: "The demo",
     heading: "Watch a referral network grow in real time.",
-    sub: "Below is a live simulation of exactly what SaaSquatch tracks: every referral, every reward trigger, every new customer — as it happens.",
+    sub: "Below is a demo simulation of what SaaSquatch tracks: every referral, every reward trigger, every new customer in real time.",
     preview: true,
     cta: "Launch the demo →",
   },
@@ -91,7 +114,7 @@ export default function Intro({ onComplete }) {
     }}>
       {/* Header */}
       <header style={{
-        height: 56, borderBottom: "1px solid var(--border)", padding: "0 2rem",
+        height: 65, borderBottom: "1px solid var(--border)", padding: "0 2rem",
         display: "flex", alignItems: "center", justifyContent: "space-between",
         background: "var(--header-bg)",
       }}>
@@ -230,21 +253,7 @@ export default function Intro({ onComplete }) {
           >
             {s.cta}
           </button>
-
-          {/* Skip link */}
-          {slide < SLIDES.length - 1 && (
-            <div style={{ marginTop: "1rem" }}>
-              <button
-                onClick={() => { setExiting(true); setTimeout(onComplete, 400); }}
-                style={{
-                  fontSize: 12, color: "var(--text-muted)", background: "none",
-                  border: "none", cursor: "pointer", textDecoration: "underline",
-                }}
-              >
-                Skip to demo
-              </button>
-            </div>
-          )}
+      
         </div>
       </div>
     </div>
