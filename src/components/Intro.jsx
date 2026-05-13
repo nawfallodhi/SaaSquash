@@ -114,25 +114,12 @@ export default function Intro({ onComplete }) {
     }}>
       {/* Header */}
       <header style={{
-        height: 65, borderBottom: "1px solid var(--border)", padding: "0 2rem",
+        height: 80, borderBottom: "1px solid var(--border)", padding: "0 2rem",
         display: "flex", alignItems: "center", justifyContent: "space-between",
         background: "var(--header-bg)",
       }}>
         <Logo onClick={() => setSlide(0)} />
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <span style={{ fontSize: 11, color: "var(--text-muted)" }}>
-            Sign up now!
-          </span>
-          <a
-            href="https://www.saasquatch.com" target="_blank" rel="noreferrer"
-            style={{
-              fontSize: 12, padding: "5px 13px", borderRadius: 6,
-              border: "1px solid var(--green-mid)", background: "var(--green-subtle)",
-              color: "var(--green-dark)", textDecoration: "none", fontWeight: 500,
-            }}
-          >
-            saasquatch.com ↗
-          </a>
         </div>
       </header>
 
@@ -186,7 +173,7 @@ export default function Intro({ onComplete }) {
           {s.stat && (
             <div style={{
               display: "inline-flex", flexDirection: "column", alignItems: "center",
-              background: "var(--header-bg)", border: "1px solid var(--border)",
+              background: "var(--bg)", border: "1px solid transparent",
               borderRadius: 12, padding: "1.25rem 2.5rem", marginBottom: "2.5rem",marginRight: "0.25rem",
             }}>
               <span style={{ fontSize: 48, fontWeight: 700, color: "var(--green-dark)", lineHeight: 1 }}>
@@ -243,13 +230,13 @@ export default function Intro({ onComplete }) {
           <button
             onClick={advance}
             style={{
-              fontSize: 15, fontWeight: 600, padding: "13px 32px",
-              borderRadius: 8, border: "none", cursor: "pointer",
-              background: "var(--green-dark)", color: "#fff",
-              transition: "opacity 0.15s",
+              fontSize: 15, fontWeight: 500, padding: "12px 26px",
+              borderRadius: 2, border: "1px solid var(--green-dark)", cursor: "pointer",
+              background: "transparent", color: "var(--green-dark)",
+              transition: "all 0.15s ease",
             }}
-            onMouseEnter={e => e.target.style.opacity = 0.85}
-            onMouseLeave={e => e.target.style.opacity = 1}
+            onMouseEnter={e => e.target.style.background = "var(--green-subtle)"}
+            onMouseLeave={e => e.target.style.background = "transparent"}
           >
             {s.cta}
           </button>

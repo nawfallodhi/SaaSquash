@@ -74,12 +74,19 @@ export default function App() {
   const [milestoneMsg, setMilestoneMsg] = useState(null);
   const [resetting, setResetting] = useState(false);
   const [wave, setWave] = useState(1);
+  const [showSignupPopup, setShowSignupPopup] = useState(false);
 
   const nodesRef = useRef(nodes);
   nodesRef.current = nodes;
   const statsRef = useRef(stats);
   statsRef.current = stats;
   const resettingRef = useRef(false);
+
+  useEffect(() => {
+    if (stats.referrals == 10 && !showSignupPopup) {
+      setShowSignupPopup(true);
+    }
+  }, [stats.referrals, showSignupPopup]);
 
   const triggerMilestone = useCallback((count) => {
     const m = MILESTONES.find(m => m.at === count);
@@ -142,17 +149,18 @@ export default function App() {
   }, [triggerMilestone, doReset]);
 
   useEffect(() => {
-    if (!running) return;
+    if (showIntro || !running) return;
+
     const interval = setInterval(tick, TICK_MS);
     return () => clearInterval(interval);
-  }, [running, tick]);
+  }, [running, tick, showIntro]);
 
   if (showIntro) return <Intro onComplete={() => setShowIntro(false)} />;
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--bg)", color: "var(--text)", fontFamily: "var(--font)" }}>
       <header style={{
-        borderBottom: "1px solid var(--border)", padding: "0 1.5rem", height: 65,
+        borderBottom: "1px solid var(--border)", padding: "0 1.5rem", height: 80,
         display: "flex", alignItems: "center", justifyContent: "space-between",
         background: "var(--header-bg)",
       }}>
@@ -170,21 +178,30 @@ export default function App() {
           </span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <span style={{ fontSize: 11, color: "var(--text-muted)" }}>Sign up now!</span>
+          <span style={{fontSize: 11, padding: "4px 8px",borderRadius: 2,border: "1px solid var(--border)",color: "var(--text-muted)"}}>
+            Sign up
+          </span>
           <a
-            href="https://www.saasquatch.com" target="_blank" rel="noreferrer"
+            href="https://www.saasquatch.com"
+            target="_blank"
+            rel="noreferrer"
             style={{
-              fontSize: 12, padding: "5px 13px", borderRadius: 6,
-              border: "1px solid var(--green-mid)", background: "var(--green-subtle)",
-              color: "var(--green-dark)", textDecoration: "none", fontWeight: 500,
+              fontSize: 12,
+              padding: "6px 12px",
+              borderRadius: 2, // square feel
+              border: "1px solid var(--green-mid)",
+              background: "transparent",
+              color: "var(--green-dark)",
+              textDecoration: "none",
+              fontWeight: 500,
             }}
           >
-            saasquatch.com ↗
+            Get started ↗
           </a>
           <button
             onClick={() => setRunning(r => !r)}
             style={{
-              fontSize: 12, padding: "5px 13px", borderRadius: 6,
+              fontSize: 12, padding: "5px 13px", borderRadius: 2,
               border: "1px solid var(--border)", background: "transparent",
               color: "var(--text)", cursor: "pointer",
             }}
@@ -203,6 +220,95 @@ export default function App() {
           fontSize: 13, color: "var(--green-dark)", fontWeight: 500,
         }}>
           {milestoneMsg}
+        </div>
+      )}
+
+      {showSignupPopup && (
+        <div style={{
+          position: "fixed",
+          inset: 0,
+          background: "rgba(0,0,0,0.35)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          zIndex: 9999,
+        }}>
+          <div style={{
+            position: "relative",
+            width: 460,
+            padding: "28px",
+            background: "var(--header-bg)",
+            border: "1px solid var(--border)",
+            borderRadius: 6,
+            boxShadow: "0 20px 60px rgba(0,0,0,0.25)",
+          }}>
+
+            {/* Close button (Windows-style) */}
+            <button
+              onClick={() => setShowSignupPopup(false)}
+              style={{
+                position: "absolute",
+                top: 10,
+                right: 10,
+                width: 28,
+                height: 28,
+                borderRadius: 4,
+                border: "1px solid var(--border)",
+                background: "transparent",
+                cursor: "pointer",
+                fontSize: 16,
+                lineHeight: "26px",
+                color: "var(--text)",
+              }}
+            >
+              ×
+            </button>
+
+            {/* Title */}
+            <div style={{
+              fontSize: 18,
+              fontWeight: 650,
+              color: "var(--text)",
+              marginBottom: 8,
+              letterSpacing: "-0.01em",
+            }}>
+              You’ve hit 10 referrals!
+            </div>
+
+            {/* Subtitle */}
+            <div style={{
+              fontSize: 13,
+              lineHeight: 1.5,
+              color: "var(--text-muted)",
+              marginBottom: 18,
+            }}>
+              This is where growth starts compounding. Set up your referral system in minutes and turn your users into your best marketers.
+            </div>
+
+            {/* Buttons */}
+            <div style={{ display: "flex", gap: 10 }}>
+              <a
+                href="https://www.saasquatch.com"
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  flex: 1,
+                  textAlign: "center",
+                  padding: "10px 12px",
+                  borderRadius: 2,
+                  border: "1px solid var(--green-mid)",
+                  color: "var(--green-dark)",
+                  textDecoration: "none",
+                  fontSize: 13,
+                  fontWeight: 500,
+                  background: "transparent",
+                }}
+              >
+                Get started
+              </a>
+            </div>
+
+          </div>
         </div>
       )}
 
