@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import StatsBar from "./components/StatsBar.jsx";
 import NetworkGraph from "./components/NetworkGraph.jsx";
-import ActivityFeed from "./components/Activityfeed.jsx";
+import ActivityFeed from "./components/ActivityFeed.jsx";
 import Intro from "./components/Intro.jsx";
 import logoimg from "./assets/logo.png"
 import {
