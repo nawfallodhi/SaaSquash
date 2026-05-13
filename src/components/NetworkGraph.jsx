@@ -1,13 +1,13 @@
 import { useEffect, useRef } from "react";
 
 const TIER_COLORS = {
-  new: "#FF4E00",
-  active: "#1D9E75",
-  advocate: "#378ADD",
+  new:      "#3a9e6e",
+  active:   "#1a6b45",
+  advocate: "#0f2d1f",
 };
 
 const TIER_SIZES = {
-  new: 8,
+  new: 7,
   active: 11,
   advocate: 15,
 };
@@ -26,7 +26,7 @@ export default function NetworkGraph({ nodes, edges, width, height }) {
       <svg width={width} height={height} style={{ display: "block" }}>
         <defs>
           <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L6,3 z" fill="#FF4E00" opacity="0.4" />
+            <path d="M0,0 L0,6 L6,3 z" fill="#3a9e6e" opacity="0.5" />
           </marker>
         </defs>
 
@@ -40,9 +40,9 @@ export default function NetworkGraph({ nodes, edges, width, height }) {
               key={edge.id}
               x1={from.x} y1={from.y}
               x2={to.x} y2={to.y}
-              stroke={isNew ? "#FF4E00" : "var(--border)"}
+              stroke={isNew ? "#1a6b45" : "#a8d5bc"}
               strokeWidth={isNew ? 1.5 : 0.8}
-              opacity={isNew ? 0.8 : 0.4}
+              opacity={isNew ? 0.9 : 0.5}
               markerEnd="url(#arrow)"
               style={{ transition: "stroke 0.6s, opacity 0.6s" }}
             />

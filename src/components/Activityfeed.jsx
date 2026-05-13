@@ -21,11 +21,8 @@ export default function ActivityFeed({ events }) {
           Live activity
         </span>
         <span style={{
-          marginLeft: 8,
-          width: 7, height: 7,
-          borderRadius: "50%",
-          background: "#1D9E75",
-          display: "inline-block",
+          marginLeft: 8, width: 7, height: 7, borderRadius: "50%",
+          background: "#3a9e6e", display: "inline-block",
           animation: "pulse 1.5s infinite",
         }} />
       </div>
@@ -57,7 +54,7 @@ function FeedItem({ event, isNew }) {
       <div style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
         <div style={{
           width: 7, height: 7, borderRadius: "50%",
-          background: "#FF4E00",
+          background: "#1a6b45",
           flexShrink: 0,
           marginTop: 5,
         }} />

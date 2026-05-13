@@ -21,10 +21,10 @@ export const EVENT_TYPES = {
 };
 
 export const MILESTONES = [
-  { at: 5,  text: "🎉 5 referrals — program momentum building!" },
-  { at: 10, text: "🚀 10 referrals — viral coefficient hitting 1.2×" },
-  { at: 20, text: "⚡ 20 referrals — top advocate tier unlocked" },
-  { at: 35, text: "🔥 35 referrals — organic growth loop fully active" },
+  { at: 5,  text: "5 referrals, program momentum building!" },
+  { at: 10, text: "10 referrals, viral coefficient hitting 1.2×" },
+  { at: 20, text: "20 referrals, top advocate tier unlocked!" },
+  { at: 30, text: "35 referrals, organic growth loop fully active!" },
 ];
 
 // Generate a position near a parent node, spreading outward
@@ -43,7 +43,7 @@ export function spawnPosition(parent, allNodes, width, height) {
     if (!tooClose) return { x, y };
   }
 
-  // fallback: just place near parent with small offset
+  //fallback: just place near parent with small offset
   return {
     x: Math.min(Math.max(parent.x + (Math.random() - 0.5) * 60, padding), width - padding),
     y: Math.min(Math.max(parent.y + (Math.random() - 0.5) * 60, padding), height - padding),
