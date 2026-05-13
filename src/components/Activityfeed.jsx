@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 
 export default function ActivityFeed({ events }) {
   const topRef = useRef(null);
