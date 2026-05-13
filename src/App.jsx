@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import StatsBar from "./components/StatsBar";
 import NetworkGraph from "./components/NetworkGraph";
 import ActivityFeed from "./components/ActivityFeed";
+import Intro from "./components/Intro";
 import {
   NAMES, REWARDS, MILESTONES,
   spawnPosition, pickRandom,
@@ -32,6 +33,7 @@ function makeOriginNode() {
 }
 
 export default function App() {
+  const [showIntro, setShowIntro] = useState(true);
   const [nodes, setNodes] = useState(() => [makeOriginNode()]);
   const [edges, setEdges] = useState([]);
   const [events, setEvents] = useState([]);
@@ -113,6 +115,8 @@ export default function App() {
     return () => clearInterval(interval);
   }, [running, tick]);
 
+  if (showIntro) return <Intro onComplete={() => setShowIntro(false)} />;
+
   return (
     <div style={{ minHeight: "100vh", background: "var(--bg)", color: "var(--text)", fontFamily: "var(--font)" }}>
       <header style={{
@@ -127,7 +131,7 @@ export default function App() {
             <circle cx="21" cy="13" r="3.5" fill="#fff"/>
             <circle cx="16" cy="21" r="3.5" fill="#fff"/>
           </svg>
-          <span style={{ fontWeight: 700, fontSize: 15, color: "var(--text)" }}>SaaSquatch</span>
+          <span style={{ fontWeight: 700, fontSize: 15, color: "var(--text)" }}>saasquatch</span>
           <span style={{ fontSize: 12, color: "var(--text-muted)", paddingLeft: 6, borderLeft: "1px solid var(--border)" }}>
             live referral network demo
           </span>
